@@ -30,7 +30,7 @@ var arraySum = function(array) {
 
     // base case
     if (newArray.length === 0) return 0;
-    // if number, pop 'n plus
+    // if number, pop 'n plus+
     if (typeof lastElement === 'number') return newArray.pop() + arraySum(newArray);
     // if we encounter an array, spread contents and concat
     return arraySum([...newArray.slice(0,-1), ...lastElement]);
@@ -58,6 +58,12 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+    // if (Math.abs(Math.abs(x) - Math.abs(y)) < 2) return [];  // no ints in range
+    x !== y && ( x > y ? x-- : x++);
+
+    return (x < y || x > y) // || (x < y && x < 0) 
+    ? [x, ...range(x, y)] 
+    : [];
 };
 
 // 7. Compute the exponent of a number.
