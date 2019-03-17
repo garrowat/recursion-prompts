@@ -7,26 +7,52 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+    return n <= 1
+    ? n < 0 ? null : 1
+    : n * factorial(n - 1);
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+    var newArray = [...array];
+    return newArray.length === 0
+    ? 0
+    : newArray.pop() + sum(newArray);
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+    // copy array
+    var newArray = [...array];
+    var lastElement = newArray[newArray.length - 1];
+
+    // base case
+    if (newArray.length === 0) return 0;
+    // if number, pop 'n plus
+    if (typeof lastElement === 'number') return newArray.pop() + arraySum(newArray);
+    // if we encounter an array, spread contents and concat
+    return arraySum([...newArray.slice(0,-1), ...lastElement]);
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+    var absN = Math.abs(n);
+    if (absN === 1) return false;
+    if (absN === 0) return true;
+    return isEven(absN - 2);
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+    var absN = Math.abs(n);
+    if (absN === 1 || absN === 0) return 0;
+    return 0 < n
+    ? (n - 1) + sumBelow(n - 1)
+    : (n + 1) + sumBelow(n + 1);
 };
 
 // 6. Get the integers within a range (x, y).
