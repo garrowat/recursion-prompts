@@ -58,12 +58,12 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
-    // if (Math.abs(Math.abs(x) - Math.abs(y)) < 2) return [];  // no ints in range
-    x !== y && ( x > y ? x-- : x++);
+    x !== y  // skip increment/decrement if there's no range
+    && (x > y ? x-- : x++);  // if x hasn't reached y yet, increment/decrement
 
-    return (x < y || x > y) // || (x < y && x < 0) 
-    ? [x, ...range(x, y)] 
-    : [];
+    return (x < y || x > y) // if we haven't closed the range yet...
+    ? [x, ...range(x, y)]   // recur, concatenate with our base-case array
+    : [];                   // when x reaches y, we're at our base case > build the array
 };
 
 // 7. Compute the exponent of a number.
