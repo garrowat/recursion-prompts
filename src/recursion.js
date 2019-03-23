@@ -74,11 +74,6 @@ var range = function(x, y) {
 var exponent = function(base, exp) {
     if (exp === 0) return 1
 
-    if (base % 2 === 0) { 
-        base = base * 2;
-        exp = exp / 2;
-    }
-
     return  exp > 0 
             ? (base * exponent(base, exp - 1))
             : 1 / ( base * exponent(base, (exp * -1) - 1));
@@ -89,6 +84,12 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+        // base case
+        if (n === 1) return true;
+        
+        if (n < 1) return false;
+
+        return powerOfTwo(n / 2);
 };
 
 // 9. Write a function that reverses a string.
